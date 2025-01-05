@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Contact Manager</title>
+    <link rel="stylesheet" href="/styles.css">
+    <!-- Optional link for external CSS -->
+</head>
+<body>
+    <!-- Banner Section -->
+    <section class="banner d-flex justify-content-center align-items-center">
+        <div>
+            <h1 class="font-weight-bold">Smart Contact Manager</h1>
+            <p class="lead">Effortlessly manage and organize your contacts with the Smart Contact Manager. Keep your professional and personal networks at your fingertips!</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Key Features</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Smart Sorting</h4>
+                    <p>Organize your contacts automatically based on preferences, such as name, company, or location.</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Cloud Sync</h4>
+                    <p>Sync your contacts across all devices, ensuring you're always connected and up to date.</p>
+                </div>
+                <div class="col-md-4">
+                    <h4>Quick Search</h4>
+                    <p>Find any contact instantly with our powerful and fast search functionality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Benefits</h2>
+            <ul>
+                <li>Stay organized with minimal effort.</li>
+                <li>Never lose track of important contacts again.</li>
+                <li>Access your contacts securely from anywhere.</li>
+                <li>Enjoy a seamless user interface that simplifies management.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Call to Action Section (Get Started Button) -->
+    <section class="cta text-center py-5">
+        <div class="container">
+            <h2 class="display-4">Ready to Get Started?</h2>
+            <p class="lead mb-4">Sign up today and start organizing your contacts effortlessly with the Smart Contact Manager.</p>
+            <a href="/signup" class="btn btn-primary btn-lg">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="text-center py-4 bg-dark text-white">
+        <p>&copy; 2024 Smart Contact Manager. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace = "base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Page</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Optional link for external CSS -->
+</head>
+<body>
+<section>
+    <header>
+        <h1>Welcome to the About Page</h1>
+        <nav>
+            <ul>
+                <li><a href="/" th:text="#{home.link1}">Link 1</a></li>
+                <li><a href="/about" th:text="#{home.link2}">Link 2</a></li>
+                <li><a href="/contact" th:text="#{home.link3}">Link 3</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>About Thymeleaf</h2>
+            <p>This is a simple homepage built using <strong>Thymeleaf</strong> templating engine.</p>
+        </section>
+
+        <section>
+            <h2>Dynamic Data</h2>
+            <p>Welcome !</p>
+            <p>The current date is: <span th:text="${#dates.format(currentDate, 'yyyy-MM-dd')}">2024-12-17</span></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Company</p>
+    </footer>
+    </section>
+</body>
+</html>
