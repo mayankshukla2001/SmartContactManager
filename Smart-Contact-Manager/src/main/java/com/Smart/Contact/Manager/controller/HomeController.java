@@ -3,6 +3,7 @@ package com.Smart.Contact.Manager.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,9 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
+	
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
 
 	@Autowired
 	private UserRepository userRepository;
@@ -28,6 +32,7 @@ public class HomeController {
 		model.addAttribute("tittle", "Home - Smart Contact Manager");
 		return "home";
 	}
+	
 
 	@RequestMapping("/about")
 	public String about(Model model) {
@@ -78,6 +83,7 @@ public class HomeController {
 	        // Proceed if there are no validation errors or duplicate email
 	        user.setRole("ROLE_USER");
 	        user.setEnabled(true);
+	        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
 	        // Save the user to the database
 	        this.userRepository.save(user);
@@ -108,6 +114,7 @@ public class HomeController {
 	        return "signup";
 	    }
 	}
+
 
 
 }
