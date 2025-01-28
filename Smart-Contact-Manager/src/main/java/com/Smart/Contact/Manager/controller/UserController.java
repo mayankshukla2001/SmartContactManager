@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.Smart.Contact.Manager.dao.ContactRepository;
 import com.Smart.Contact.Manager.dao.UserRepository;
 import com.Smart.Contact.Manager.entities.Contact;
 import com.Smart.Contact.Manager.entities.User;
@@ -30,6 +32,9 @@ import jakarta.servlet.http.HttpSession;
 public class UserController {
 	@Autowired
 	private UserRepository repository;
+	
+	@Autowired
+	private ContactRepository contactRepository;
 
 	// Method for adding common data to response.
 	@ModelAttribute
@@ -114,6 +119,24 @@ public class UserController {
 		// Return the view name (could be a redirect or a different view based on your
 		// flow)
 		return "normal/add_contact_form"; // Return the view name
+	}
+	
+	// Show contacts handler
+	@GetMapping("/show-contacts")
+	public String showContact(Model m, Principal principal)
+	{
+		m.addAttribute("title", "Show User Contacts");
+		String userName = principal.getName();
+		User user = this.repository.getUserByUserName(userName);
+		System.out.println("user : " + user);
+//		List<Contact> contacts = user.getContacts();
+		
+		
+		List<Contact> contacts = this.contactRepository.findContactsByUser(user.getId());
+		System.out.println("List1 : " +contacts);
+		m.addAttribute("contacts", contacts);
+
+		return "normal/show_contacts";
 	}
 
 }
