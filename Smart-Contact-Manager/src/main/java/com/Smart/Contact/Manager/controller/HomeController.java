@@ -82,7 +82,7 @@ public class HomeController {
 	        }
 
 	        // Proceed if there are no validation errors or duplicate email
-	        user.setRole("ROLE_USER");
+	        user.setRole("USER");
 	        user.setEnabled(true);
 	        user.setPassword(passwordEncoder.encode(user.getPassword()));
 

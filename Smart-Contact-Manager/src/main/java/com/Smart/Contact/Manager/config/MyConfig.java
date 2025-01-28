@@ -48,6 +48,7 @@ public class MyConfig {
             .formLogin(form -> form
                 .loginPage("/signin") // Custom login page URL
                 .loginProcessingUrl("/login") // Login submission URL
+                .defaultSuccessUrl("/user/index")
                 .permitAll() // Allow anyone to access the login page
             )
             .logout(logout -> logout
