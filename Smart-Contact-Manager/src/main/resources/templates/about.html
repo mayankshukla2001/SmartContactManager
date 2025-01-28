@@ -1,40 +1,127 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace = "base::Layout(~{::section})">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base::Layout(~{::section})}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Page</title>
-    <link rel="stylesheet" href="/styles.css"> <!-- Optional link for external CSS -->
+    <title>About Smart Contact Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Optional link for external CSS -->
 </head>
 <body>
-<section>
-    <header>
-        <h1>Welcome to the About Page</h1>
-        <nav>
-            <ul>
-                <li><a href="/" th:text="#{home.link1}">Link 1</a></li>
-                <li><a href="/about" th:text="#{home.link2}">Link 2</a></li>
-                <li><a href="/contact" th:text="#{home.link3}">Link 3</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
+    <div class="container mt-5">
+        <!-- About Section -->
         <section>
-            <h2>About Thymeleaf</h2>
-            <p>This is a simple homepage built using <strong>Thymeleaf</strong> templating engine.</p>
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center mb-4">About Smart Contact Manager</h2>
+                    <p class="lead">Smart Contact Manager is a web application designed to help users manage their personal contacts efficiently.</p>
+                    <p>The application allows users to:</p>
+                    <ul>
+                        <li>Add new contacts</li>
+                        <li>Edit existing contact details</li>
+                        <li>Delete contacts</li>
+                        <li>Search for contacts by name, phone, or email</li>
+                        <li>Manage contacts securely with user authentication and authorization</li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
+        <!-- Key Features Section -->
         <section>
-            <h2>Dynamic Data</h2>
-            <p>Welcome !</p>
-            <p>The current date is: <span th:text="${#dates.format(currentDate, 'yyyy-MM-dd')}">2024-12-17</span></p>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h2 class="text-center mb-4">Key Features</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">User Authentication</h5>
+                                    <p class="card-text">Secure login and registration system for users.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Role-based Access</h5>
+                                    <p class="card-text">Different access levels for regular users and admins.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Contact Management</h5>
+                                    <p class="card-text">Add, view, edit, and delete contacts.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Search Functionality</h5>
+                                    <p class="card-text">Quick and easy search options for finding contacts.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="card-title">Responsive Design</h5>
+                                    <p class="card-text">The application is designed to work well on both desktop and mobile devices.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-    </main>
 
-    <footer>
-        <p>&copy; 2024 Your Company</p>
-    </footer>
-    </section>
+        <!-- Technology Stack Section -->
+        <section>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h2 class="text-center mb-4">Technology Stack</h2>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Spring Boot:</strong> For building the backend and handling API requests</li>
+                        <li class="list-group-item"><strong>Spring Security:</strong> For securing the application with user authentication and authorization</li>
+                        <li class="list-group-item"><strong>Thymeleaf:</strong> A templating engine used for rendering dynamic views</li>
+                        <li class="list-group-item"><strong>Bootstrap:</strong> For styling and making the application responsive</li>
+                        <li class="list-group-item"><strong>H2 Database:</strong> For storing user data and contact information (you can switch to MySQL or other databases as required)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Us Section -->
+        <section>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h2 class="text-center mb-4">Contact Us</h2>
+                    <p>If you have any questions or feedback, feel free to reach out to us via the <a href="/contact" class="btn btn-info">Contact Page</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Current Date and Time Section -->
+        <section>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h2 class="text-center mb-4">Current Date and Time</h2>
+                    <p class="text-center">The current date is: <span th:text="${#dates.format(currentDate, 'yyyy-MM-dd')}">2024-12-17</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center mt-5 py-4 bg-light">
+            <p>&copy; 2024 Smart Contact Manager. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

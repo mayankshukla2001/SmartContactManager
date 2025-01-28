@@ -20,7 +20,7 @@ body {
 .register-container {
 	overflow: hidden; /* Disable scroll */
 	margin-left: 29%;
-    margin-top: 1%;
+	margin-top: 1%;
 	max-width: 500px;
 	width: 100%;
 	padding: 40px;
@@ -36,7 +36,6 @@ body {
 }
 
 .form-control {
-	border-radius: 50px;
 	box-shadow: none;
 	border: 1px solid #ddd;
 	padding-left: 40px;
@@ -89,22 +88,126 @@ body {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media ( max-width : 768px) {
 	.register-container {
 		padding: 30px;
 	}
 }
 
 #login .container #login-row #login-column #login-box {
-  margin-top: 120px;
-  max-width: 600px;
-  height: 370px;
-  border: 1px solid #9C9C9C;
-  background-color: #EAEAEA;
+	margin-top: 120px;
+	max-width: 600px;
+	height: 370px;
+	border: 1px solid #9C9C9C;
+	background-color: #EAEAEA;
 }
+
 #login .container #login-row #login-column #login-box #login-form {
-  padding: 20px;
+	padding: 20px;
 }
-#login .container #login-row #login-column #login-box #login-form #register-link {
-  margin-top: -85px;
+
+#login .container #login-row #login-column #login-box #login-form #register-link
+	{
+	margin-top: -85px;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 250px; /* Set width of sidebar */
+    background-color: #343a40; /* Dark background */
+    height: 100%; /* Full height */
+    position: fixed;
+    left: -250px; /* Initially hidden off-screen */
+    padding-top: 40px;
+    transition: transform 0.3s ease; /* Smooth transition for the sidebar when collapsing */
+}
+
+/* Show the sidebar when the class 'show-sidebar' is added */
+.sidebar.show-sidebar {
+    transform: translateX(250px); /* Move the sidebar into view */
+}
+
+/* Sidebar links styling */
+.sidebar a {
+    display: block;
+    padding: 15px 30px;
+    text-decoration: none;
+    color: #ffffff; /* White text */
+    font-size: 23px;
+    font-weight: 500;
+    transition: background-color 0.3s ease, padding-left 0.3s ease;
+    /* Smooth transition for hover */
+}
+
+/* On Hover, highlight the sidebar links */
+.sidebar a:hover {
+    background-color: #007bff; /* Highlight on hover */
+    padding-left: 40px;
+    /* Add some left padding to create a slide effect */
+}
+
+/* Sidebar Link Active State */
+.sidebar a.active {
+    background-color: #0056b3; /* Darker color for active link */
+    font-weight: bold;
+}
+
+/* Content Area */
+.content {
+    margin-left: 0px; /* Initially no margin */
+    padding-left: 20px;
+    transition: margin-left 0.3s ease;
+    /* Smooth transition when sidebar collapses */
+}
+
+/* When sidebar is shown, shift the content */
+.sidebar.show-sidebar ~ .content {
+    margin-left: 250px; /* Adjust content area to match sidebar width */
+}
+
+/* For screens smaller than 992px, adjust layout */
+@media (max-width: 992px) {
+    /* Collapse the sidebar by moving it off the screen */
+    .sidebar {
+        transform: translateX(-100%); /* Initially off-screen */
+        padding-top: 20px;
+    }
+
+    /* Content area adjusts its margin */
+    .content {
+        margin-left: 0;
+    }
+
+    /* Show the sidebar when hovering over the content (optional) */
+    .content:hover + .sidebar {
+        transform: translateX(0);
+    }
+}
+
+/* For mobile screens, adjust font sizes */
+@media (max-width: 768px) {
+    .sidebar {
+        padding-top: 50px;
+    }
+    .sidebar a {
+        font-size: 14px; /* Adjust font size for small screens */
+    }
+}
+
+/* Optional: Add a hover effect on sidebar items */
+.sidebar a:hover {
+    background-color: #0056b3;
+    color: #ffffff;
+    padding-left: 35px;
+    /* Add a little left padding to make it more visually appealing */
+}
+
+/* Close button for sidebar */
+.sidebar .crossBtn {
+    position: absolute;
+    top: 0;
+    right: 35px;
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
 }

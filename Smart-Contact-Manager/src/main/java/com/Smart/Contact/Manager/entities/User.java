@@ -50,6 +50,17 @@ public class User {
 	@NotNull(message = "Enabled field is required")
 	private boolean enabled;
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
+				+ ", imageUrl=" + imageUrl + ", about=" + about + ", enabled=" + enabled + ", contacts=" + contacts
+				+ ", getContacts()=" + getContacts() + ", getId()=" + getId() + ", getName()=" + getName()
+				+ ", getEmail()=" + getEmail() + ", getPassword()=" + getPassword() + ", getRole()=" + getRole()
+				+ ", getImageUrl()=" + getImageUrl() + ", getAbout()=" + getAbout() + ", isEnabled()=" + isEnabled()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
 	private List<Contact> contacts = new ArrayList<>();
 
