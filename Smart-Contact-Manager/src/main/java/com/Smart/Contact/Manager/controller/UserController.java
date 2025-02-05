@@ -178,14 +178,13 @@ public class UserController {
 			User user = this.repository.getUserByUserName(userName);
 
 			// Find the contact by ID
-			Contact contact = this.contactRepository.findById(contactId).orElse(null);
+			Contact contact = this.contactRepository.findById(contactId).get();
 
 			// Ensure the contact exists and belongs to the logged-in user
 			if (contact != null && contact.getUser().getId() == user.getId()) {
 				// Delete the contact (cascade deletes associated data if configured)
-				contact.setUser(null);
-				this.contactRepository.delete(contact);
-
+				user.getContacts().remove(contact);
+				this.repository.save(user);
 				// Optionally, delete the image from the file system if you are storing it
 				String imagePath = "src/main/resources/static/img/" + contact.getImage();
 				File imageFile = new File(imagePath);
