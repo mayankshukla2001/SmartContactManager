@@ -1,16 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{normal/base::Layout(~{::section})}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/base::Layout(~{::section})}">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Page</title>
-<link rel="stylesheet" href="/styles.css">
-<!-- Optional link for external CSS -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    /* Make sure the body and html are full height and no scrolling */
+    html, body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden; /* Prevent scrolling */
+    }
+    .container {
+      min-height: 100vh; /* Full viewport height */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .card {
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
-	<section>
-		<h1>This is a private dashboard</h1>
-	</section>
+  <section>
+    <div class="container">
+      <div class="card">
+        <div class="card-body text-center">
+          <!-- Image Section -->
+          <img alt="Contact Image" src="" th:src="@{'/img/contact.png'}" class="img-fluid mb-3">
+
+			<h1 class="text-center mt-3 text-secondary font-italic font-weight-light">Start Adding your contact on cloud....</h1>
+          <!-- Add Contact Button -->
+          <a href="#" th:href="@{/user/add-contact}" class="btn btn-primary mt-3 mb-5">Add Contact</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </body>
 </html>

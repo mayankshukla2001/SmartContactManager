@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{normal/base::Layout(~{::section})}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile Page</title>
+<link rel="stylesheet" href="/styles.css">
+<!-- Optional link for external CSS -->
+</head>
+<body>
+	<section>
+		<div class="container mt-5">
+			<!-- Profile Card -->
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header bg-primary text-white">
+							<h4>User Profile</h4>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-4 text-center">
+									<!-- Profile Picture -->
+									<img th:src="@{'/img/' + ${user.imageUrl}}"
+										class="img-fluid rounded-circle" alt="User Picture"
+										style="max-width: 150px;">
+								</div>
+								<div class="col-md-8">
+									<!-- User Information -->
+									<h5 th:text="${user.name}">John Doe</h5>
+									<p th:text="'Email: ' + ${user.email}">Email:
+										johndoe@example.com</p>
+									<p th:text="'Role: ' + ${user.role}">Role: User</p>
+
+									<p th:text="'Bio: ' + ${user.about}" class="text-muted">Bio:
+										Passionate about web development and technology. Love coding
+										and creating new projects.</p>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer text-center">
+							<!-- Edit Profile Button -->
+							<a href="" th:href="@{/user/edit-profile/{id}(id=${user.id})}" class="btn btn-warning">Edit
+								Profile</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+</body>
+</html>

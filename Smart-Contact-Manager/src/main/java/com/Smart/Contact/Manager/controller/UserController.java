@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +42,9 @@ public class UserController {
 
 	@Autowired
 	private ContactRepository contactRepository;
+	
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
 
 	// Method for adding common data to response.
 	@ModelAttribute
@@ -292,5 +296,96 @@ public class UserController {
 			throw new RuntimeException("Failed to upload image", e); // Or handle the error accordingly
 		}
 	}
+	
+	// Your profile handler
+	@GetMapping("/profile")
+	public String yourProfile(Model model)
+	{
+		model.addAttribute("title", "Profile Page");
+		return "normal/profile";
+	}
+	
+	 // Get User by ID and show the Edit Profile form
+    @GetMapping("/edit-profile/{id}")
+    public String showEditProfileForm(@PathVariable("id") int id, Model model) {
+        Optional<User> userOpt = repository.findById(id);
+        if (userOpt.isPresent()) {
+            model.addAttribute("user", userOpt.get());
+            return "normal/edit_profile_form";  // Thymeleaf template (edit-profile.html)
+        } else {
+            // User not found, return error or redirect to some page
+            return "redirect:/error";  
+        }
+    }
+    
+    // Handle Profile Update
+    @PostMapping("/update-profile/{id}")
+    public String updateProfile(@PathVariable("id") int id,
+                                @RequestParam("name") String name,
+                                @RequestParam("email") String email,
+                                @RequestParam("password") String password,
+                                @RequestParam("role") String role,
+                                @RequestParam(value = "image", required = false) MultipartFile image,
+                                @RequestParam("about") String about) {
+
+        Optional<User> userOpt = repository.findById(id);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+
+            user.setName(name);
+            user.setEmail(email);
+            user.setRole(role);
+            user.setAbout(about);
+
+            // If password is not empty, update it
+            if (!password.isEmpty()) {
+    	        user.setPassword(passwordEncoder.encode(password));
+            }
+
+            // Handle Profile Image Upload
+            if (!image.isEmpty()) {
+                String imageUrl = uploadImage(image);  // Method to upload image and return the URL
+                user.setImageUrl(imageUrl);
+            }
+
+            // Save the updated user
+            repository.save(user);
+
+            // Redirect to user profile page
+            return "redirect:/user/profile";
+        } else {
+            return "redirect:/error";  // Handle user not found
+        }
+    }
+
+    // Image upload helper function
+    private String uploadImage(MultipartFile image) {
+        String uploadDir = "src/main/resources/static/img";  // Define your upload directory
+        File directory = new File(uploadDir);
+
+        String fileName = image.getOriginalFilename();
+        
+		// Create the path to save the file
+		File saveFile = new File(uploadDir, fileName);
+		Path path = saveFile.toPath();
+
+		// Check if the directory exists, if not, create it
+		if (!saveFile.getParentFile().exists()) {
+			saveFile.getParentFile().mkdirs(); // Create necessary directories
+		}
+
+		// Set the contact's image name (this will be saved in the database)
+        try {
+    		// Save the uploaded file to the specified directory
+    		Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+    		System.out.println("Image is uploaded to: " + path);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Image upload failed");
+        }
+
+        return fileName;  // Return the path to the image
+    }
+	
 
 }
