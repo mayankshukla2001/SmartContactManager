@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{normal/base::Layout(~{::section})}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Profile</title>
+<link rel="stylesheet" href="/styles.css">
+<!-- Optional link for external CSS -->
+</head>
+<body>
+	<section>
+		<div class="container mt-5">
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header bg-primary text-white">
+							<h4>Edit Profile</h4>
+						</div>
+						<div class="card-body">
+							<!-- Profile Edit Form -->
+							<form th:action="@{/user/update-profile/{id}(id=${user.id})}"
+								method="post" enctype="multipart/form-data">
+								<div class="mb-3">
+									<label for="name" class="form-label">Name</label> <input
+										type="text" class="form-control" id="name" name="name"
+										th:value="${user.name}" required>
+								</div>
+								<div class="mb-3">
+									<label for="email" class="form-label">Email</label> <input
+										type="email" class="form-control" id="email" name="email"
+										th:value="${user.email}" required>
+								</div>
+								<div class="mb-3">
+									<label for="password" class="form-label">Password</label> <input
+										type="password" class="form-control" id="password"
+										name="password" required> <small
+										class="form-text text-muted">Leave blank to keep the
+										current password.</small>
+								</div>
+								<div class="mb-3">
+									<label for="role" class="form-label">Role</label> <input
+										type="text" class="form-control" id="role" name="role"
+										th:value="${user.role}" required>
+								</div>
+								<div class="mb-3">
+									<label for="image" class="form-label">Profile Image</label> <input
+										type="file" class="form-control" id="image" name="image">
+									<img th:src="@{'/img/' + ${user.imageUrl}}" alt="Current Profile Image"
+										class="img-fluid mt-2" style="max-width: 100px;">
+								</div>
+								<div class="mb-3">
+									<label for="about" class="form-label">About</label>
+									<textarea class="form-control" id="about" name="about" rows="3"
+										required th:text="${user.about}"></textarea>
+								</div>
+								<button type="submit" class="btn btn-success">Save
+									Changes</button>
+								<a href="" th:href="@{/user/profile}" class="btn btn-secondary ml-3">Cancel</a>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
